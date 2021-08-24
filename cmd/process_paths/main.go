@@ -26,7 +26,13 @@ func main() {
 
 	if *outType == "hash" {
 		for _, v := range proc {
-			hash := sha256.Sum256([]byte(v))
+			f, err := os.ReadFile(v)
+			if err != nil {
+				log.Print(err)
+				continue
+			}
+
+			hash := sha256.Sum256(f)
 			encoder := hex.NewEncoder(os.Stdout)
 			encoder.Write(hash[:])
 			fmt.Println()
