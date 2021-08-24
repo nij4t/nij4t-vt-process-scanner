@@ -9,6 +9,6 @@ bin/%.exe: cmd/%/main.go
 	${OPTIONS} go build -o $@ $<
 	
 clean: 
-	rm -rf bin/vt.exe
+	rm -rf ${BINS}
 
 .PHONY: all clean
