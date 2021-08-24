@@ -1,9 +1,12 @@
 include config.mk
 
-all: vt.exe
+SRCS := $(wildcard cmd/**/*.go)
+BINS := $(SRCS:cmd/%/main.go=bin/%.exe)
 
-vt.exe: 
-	${OPTIONS} go build -o bin/$@ ./cmd/main.go$<
+all: ${BINS}
+
+bin/%.exe: cmd/%/main.go
+	${OPTIONS} go build -o $@ $<
 	
 clean: 
 	rm -rf bin/vt.exe
