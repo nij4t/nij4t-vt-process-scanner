@@ -1,8 +1,6 @@
-package main
+package process
 
 import (
-	"fmt"
-	"log"
 	"os/exec"
 	"strings"
 	"syscall"
@@ -82,7 +80,7 @@ func getRawProcessPaths() ([]byte, error) {
 	return out, nil
 }
 
-func getProcessPaths() ([]string, error) {
+func GetProcessPaths() ([]string, error) {
 	rawProc, err := getRawProcessPaths()
 
 	proc := filter(strings.Split(string(rawProc), "\n"))
@@ -97,22 +95,4 @@ func getProcessPaths() ([]string, error) {
 	}
 
 	return proc, nil
-}
-
-func main() {
-	// taskList, err := getProcessList()
-
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// proc, err := getProcessPath(taskList[0])
-	proc, err := getProcessPaths()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// fmt.Println(strings.Join(taskList, "\n"))
-	fmt.Println(strings.Join(proc, "\n"))
 }

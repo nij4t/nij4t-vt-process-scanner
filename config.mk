@@ -1,0 +1,2 @@
+OPTIONS = GOOS=windows GOARCH=amd64
+
